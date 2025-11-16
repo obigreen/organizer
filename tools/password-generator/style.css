@@ -1,0 +1,172 @@
+/* Карточка инструмента */
+.password_card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-xl);
+    padding: 15px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(255, 255, 255, 0.02);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Бокс с паролем */
+.password_box {
+    background: #1a1f1e;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 14px;
+    padding: 22px 18px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.password_value {
+    font-family: ui-monospace, monospace;
+    font-size: 18px;
+    word-break: break-word;
+    user-select: all;
+}
+
+.password_stat {
+    position: absolute;
+    top: 4px;
+    right: 7px;
+    font-size: 10px;
+    color: var(--color-text-muted);
+}
+
+/* Кнопки */
+.password_controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.btn {
+    appearance: none;
+    border: 0;
+    padding: 12px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: transform .07s ease, box-shadow .2s ease;
+}
+
+.btn:active {
+    transform: translateY(1px) scale(.99);
+}
+
+.btn_accent {
+    background: var(--color-accent);
+    color: white;
+    box-shadow: 0 8px 18px rgba(0, 114, 79, 0.4);
+}
+
+.btn_secondary {
+    background: #1f1f1f;
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border-subtle);
+}
+
+/* Опции */
+.options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.option_item {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--color-border-subtle);
+    padding: 14px;
+    border-radius: 12px;
+}
+
+.option_label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.range {
+    width: 100%;
+}
+
+.option_hint {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    margin-top: 6px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: rgba(0, 114, 79, 0.2);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius-pill);
+    font-size: 12px;
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%) translateY(20px);
+    background: #1f1f1f;
+    color: var(--color-text-main);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 10px 16px;
+    border-radius: 12px;
+    opacity: 0;
+    transition: opacity .2s ease, transform .2s ease;
+    pointer-events: none;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+
+@media screen and (max-width: 767px) {
+    /* Опции */
+    .options {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+
+@media screen and (max-width: 426px) {
+    .password_controls {
+        justify-content: space-between;
+    }
+
+    .btn_accent {
+        width: 100%;
+        max-width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 374px) {
+    .btn_accent, .btn_secondary {
+        font-size: 12px;
+    }
+
+    .password_value {
+        font-size: 14px;
+    }
+
+    .password_stat {
+        top: 4px;
+        right: 7px;
+        font-size: 10px;
+    }
+
+
+}

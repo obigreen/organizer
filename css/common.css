@@ -50,16 +50,15 @@
     box-sizing: border-box;
 }
 
-html {
-    font-size: 16px;
-}
-
 body {
-    height: 100vh;
+    height:  100vh;
     font-family: var(--font-family-base), sans-serif;
     font-size: var(--font-size-base);
     color: var(--color-text-main);
     background: radial-gradient(circle at top, #1f4136 0, #121212 50%, #050505 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-size: 16px;
 }
 
 .container {
@@ -85,6 +84,7 @@ input:focus-visible {
     max-width: 1920px;
     width: 100%;
     margin: 0 auto;
+    padding-bottom: 40px;
 }
 
 

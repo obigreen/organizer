@@ -5,6 +5,12 @@
     margin-bottom: var(--space-md);
 }
 
+.header_inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 /* ========== Logo ========== */
 
 .logo {
@@ -45,4 +51,33 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--color-text-muted);
+}
+
+/* Кнопка "назад" в хедере */
+.header_back {
+    padding: 7px 14px;
+    border-radius: var(--radius-pill);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--color-text-muted);
+
+    background: linear-gradient(
+            135deg,
+            rgba(0, 114, 79, 0.25),
+            rgba(0, 0, 0, 0.4)
+    );
+    border: 1px solid rgba(0, 114, 79, 0.7);
+    box-shadow: 0 0 12px rgba(0, 114, 79, 0.4);
+    backdrop-filter: blur(12px);
+
+    transition: transform .07s ease;
+}
+
+.header_back:hover {
+    transform: translateY(-1px);
+}
+
+.header_back:active {
+    transform: translateY(1px);
 }

@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="./style.css">
 
     <!-- Favicon basic -->
     <link rel="icon" type="image/png" sizes="32x32" href="../../icons/favicon-32x32.png">
@@ -21,23 +22,91 @@
     <link rel="manifest" href="../../icons/site.webmanifest">
 
 </head>
+
+
 <body>
 
 <header class="header">
-    <div class="container">
+    <div class="container header_inner">
         <div class="logo">
             <span class="logo_mark">OZ</span>
             <span class="logo_text">Organizer</span>
         </div>
+        <a href="../../index.html" class="header_back">
+            ← Back
+        </a>
     </div>
 
 </header>
 
 <main class="main">
-    <div class="container">
+    <section class="password_section">
+        <div class="container">
+            <div class="password_card">
 
-    </div>
+                <!-- Блок пароля -->
+                <div class="password_box">
+                    <div id="password" class="password_value">Сгенерировать пароль</div>
+                    <div id="password_stat" class="password_stat">длина: 0</div>
+                </div>
+
+                <!-- Кнопки -->
+                <div class="password_controls">
+                    <button id="btn_generate" class="btn btn_accent" type="button">Сгенерировать</button>
+                    <button id="btn_copy" class="btn btn_secondary" type="button" disabled>Скопировать</button>
+                </div>
+
+                <!-- Настройки -->
+                <div class="options">
+
+                    <div class="option_item">
+                        <label for="opt_length" class="option_label">
+                            <strong>Длина:</strong>
+                            <span id="length_label" class="badge">20</span>
+                        </label>
+
+                        <input id="opt_length" type="range" min="12" max="64" step="1" value="20" class="range"/>
+
+                        <p class="option_hint">Рекомендуется 16–24 для большинства сервисов.</p>
+                    </div>
+
+                    <div class="option_item">
+                        <label class="option_label">
+                            <input id="opt_symbols" type="checkbox" checked />
+                            Включать символы (!@#$…)
+                        </label>
+
+                        <label class="option_label">
+                            <input id="opt_avoid" type="checkbox" checked />
+                            Исключить похожие символы (O/0, l/1, I)
+                        </label>
+
+                        <p class="option_hint">Полезно, если хотите повысить читаемость пароля.</p>
+                    </div>
+
+                    <div class="option_item">
+                        <label class="option_label">
+                            <input id="opt_require" type="checkbox" checked />
+                            Гарантировать все классы (Aa, 0–9, символ)
+                        </label>
+
+                        <p class="option_hint">
+                            Хотя бы по одному символу каждого выбранного класса.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <div id="toast" class="toast">Скопировано</div>
 </main>
 
+
+<script src="script.js"></script>
 </body>
 </html>
