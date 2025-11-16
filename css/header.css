@@ -1,0 +1,48 @@
+.header {
+    padding: 25px 0;
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--space-md);
+}
+
+/* ========== Logo ========== */
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: max-content;
+    gap: var(--space-sm);
+    padding: 7px;
+    border-radius: var(--radius-pill);
+    background: linear-gradient(
+            135deg,
+            rgba(0, 114, 79, 0.25),
+            rgba(0, 0, 0, 0.4)
+    );
+    border: 1px solid rgba(0, 114, 79, 0.7);
+    box-shadow: 0 0 12px rgba(0, 114, 79, 0.4);
+    backdrop-filter: blur(12px);
+}
+
+.logo_mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 20%, #00a06d, #00724f 70%, #00432f 100%);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+}
+
+.logo_text {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
