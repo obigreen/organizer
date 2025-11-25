@@ -87,4 +87,39 @@
     }
 
 
+    function generatePassword(options) {
+
+        const {
+            upperPool, lowerPool, digitPool, symbolPool, fullPool, must
+        } = preparePools(options);
+
+        const remaing = Math.max(options.length - must.length, 0);
+        const result = [...must];
+        for (let i = 0; i < remaing; i++) {
+            const randomChar = fullPool[randomInit(fullPool.length)];
+            result.push(randomChar);
+        }
+        shuffle(result);
+
+        for (let i = 2; i < result.length; i++) {
+            const a = result[i];
+            const b = result[i - 1];
+            const c = result[i - 2];
+
+            if (a === b && a === c) {
+                let replacement;
+
+                do {
+                    replacement = fullPool[randomInit(fullPool.length)];
+                } while (replacement === a);
+
+                result[i] = replacement;
+            }
+        }
+    }
+
+
+
+
+
 })
