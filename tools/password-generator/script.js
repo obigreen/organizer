@@ -93,9 +93,9 @@
             upperPool, lowerPool, digitPool, symbolPool, fullPool, must
         } = preparePools(options);
 
-        const remaing = Math.max(options.length - must.length, 0);
+        const remaining = Math.max(options.length - must.length, 0);
         const result = [...must];
-        for (let i = 0; i < remaing; i++) {
+        for (let i = 0; i < remaining; i++) {
             const randomChar = fullPool[randomInit(fullPool.length)];
             result.push(randomChar);
         }
@@ -116,6 +116,9 @@
                 result[i] = replacement;
             }
         }
+
+        return result.join("");
+
     }
 
     // ============================================================
@@ -123,7 +126,7 @@
     // ============================================================
 
     const elPassword = document.getElementById("password");
-    const elPasswordStart = document.getElementById("password_stat");
+    const elPasswordStat = document.getElementById("password_stat");
     const btnGenerate = document.getElementById("btn_generate");
     const btnCopy = document.getElementById("btn_copy");
     const elLength = document.getElementById("opt_length");
@@ -135,7 +138,7 @@
 
 
     // Храним последний пароль
-    let lastPassword = [];
+    let lastPassword = "";
 
     // Получаем настройки пользователя
     function currentOptions() {
@@ -154,7 +157,7 @@
 
     // Обновляем значение длины в блок с паролем
     function updatePasswordStat() {
-        elPasswordStart.textContent = `длина: ${lastPassword.length}`;
+        elPasswordStat.textContent = `длина: ${lastPassword.length}`;
     }
 
     // Генерируем пароль
@@ -221,4 +224,4 @@
     doGenerate()
 
 
-})
+})();
