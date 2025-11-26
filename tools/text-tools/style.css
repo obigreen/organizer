@@ -1,0 +1,126 @@
+/* Карточка инструмента — как в password_generator */
+.texttools_card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-xl);
+    padding: 18px;
+    box-shadow:
+            0 30px 70px rgba(0, 0, 0, 0.9),
+            0 0 0 1px rgba(255, 255, 255, 0.02);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Заголовок */
+.texttools_header {
+    margin-bottom: 18px;
+}
+
+.texttools_title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+
+/* Панель фильтров */
+.texttools_toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+/* Все кнопки наследуют .btn */
+.texttools_btn {
+    white-space: nowrap;
+}
+
+/* Активная кнопка фильтра (включён) */
+.texttools_btn.active {
+    border: 1px solid var(--color-accent);
+    background: rgba(0, 114, 79, 0.25);
+    color: var(--color-accent);
+    box-shadow: 0 0 12px rgba(0, 114, 79, 0.7);
+}
+
+/* Область текста */
+.texttools_area_box {
+    background: #1a1f1e;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 14px;
+    padding: 16px 14px 12px;
+    position: relative;
+}
+
+.texttools_label {
+    display: block;
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin-bottom: 6px;
+}
+
+.texttools_textarea {
+    width: 100%;
+    min-height: 180px;
+    resize: vertical;
+    border-radius: 10px;
+    border: 1px solid var(--color-border-subtle);
+    background: #111514;
+    color: var(--color-text-main);
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: ui-monospace, monospace;
+    outline: none;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+.texttools_textarea:focus {
+    border-color: var(--color-accent);
+    box-shadow:
+            0 0 0 1px rgba(0, 114, 79, 0.5),
+            0 0 0 4px rgba(0, 114, 79, 0.18);
+}
+
+/* Статус под полем */
+.texttools_status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+/* Адаптив */
+@media screen and (max-width: 767px) {
+    .texttools_card {
+        padding: 14px;
+    }
+
+    .texttools_toolbar {
+        gap: 8px;
+    }
+
+    .texttools_btn {
+        flex: 1 1 auto;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .texttools_title {
+        font-size: 18px;
+    }
+
+    .texttools_textarea {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 374px) {
+    .texttools_btn {
+        font-size: 12px;
+        padding: 10px 12px;
+    }
+}

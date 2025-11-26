@@ -1,10 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text tools</title>
+
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="./style.css">
+
+    <!-- Favicon basic -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../../icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../icons/favicon-16x16.png">
+    <link rel="shortcut icon" href="../../icons/favicon.ico">
+
+    <!-- iOS icon -->
+    <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+
+    <!-- PWA manifest -->
+    <link rel="manifest" href="../../icons/site.webmanifest">
 </head>
+
 <body>
 
+<header class="header">
+    <div class="container header_inner">
+        <div class="logo">
+            <span class="logo_mark">OZ</span>
+            <span class="logo_text">Organizer</span>
+        </div>
+        <a href="../../index.html" class="header_back">
+            ← Back
+        </a>
+    </div>
+</header>
+
+<main class="main">
+    <section class="texttools_section">
+        <div class="container">
+            <div class="texttools_card">
+
+                <!-- Заголовок инструмента -->
+                <header class="texttools_header">
+                    <h1 class="texttools_title">Text Tools</h1>
+                </header>
+
+                <!-- Панель фильтров -->
+                <div class="texttools_toolbar">
+
+                    <button type="button"
+                            class="btn btn_accent texttools_btn"
+                            data-action="upper">UPPERCASE
+                    </button>
+
+                    <button type="button"
+                            class="btn btn_secondary texttools_btn"
+                            data-action="lower">lowercase
+                    </button>
+
+                    <button type="button"
+                            class="btn btn_secondary texttools_btn"
+                            data-action="spaces">Пробелы между символами
+                    </button>
+
+                    <button type="button"
+                            class="btn btn_secondary texttools_btn"
+                            data-action="layout-ru-en">Раскладка RU → EN
+                    </button>
+                </div>
+
+                <!-- Поле ввода текста -->
+                <div class="texttools_area_box">
+                    <label class="texttools_label" for="texttools_input">
+                        Вставьте текст для обработки
+                    </label>
+                    <textarea
+                            id="texttools_input"
+                            class="texttools_textarea"
+                            spellcheck="false">
+                    </textarea>
+                    <div class="texttools_status">
+                        <span id="texttools_chars">Символов: 0</span>
+                        <span id="texttools_lines">Строк: 0</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="script.js"></script>
 </body>
 </html>
