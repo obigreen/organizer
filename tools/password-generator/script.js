@@ -118,8 +118,107 @@
         }
     }
 
+    // ============================================================
+    // =============== РАБОТА С ИНТЕРФЕЙСОМ (DOM) =================
+    // ============================================================
+
+    const elPassword = document.getElementById("password");
+    const elPasswordStart = document.getElementById("password_stat");
+    const btnGenerate = document.getElementById("btn_generate");
+    const btnCopy = document.getElementById("btn_copy");
+    const elLength = document.getElementById("opt_length");
+    const elLengthLabel = document.getElementById("length_label");
+    const elSymbols = document.getElementById("opt_symbols");
+    const elAvoid = document.getElementById("opt_avoid");
+    const elRequire = document.getElementById("opt_require");
+    const toast = document.getElementById("toast");
 
 
+    // Храним последний пароль
+    let lastPassword = [];
+
+    // Получаем настройки пользователя
+    function currentOptions() {
+        return {
+            length: parseInt(elLength.value, 10) || 20,
+            includeSymbols: elSymbols.checked,
+            avoidSimilar: elAvoid.checked,
+            requireEach: elRequire.checked
+        }
+    }
+
+    // Обновляем значение длины возле range
+    function updateLengthLabel() {
+        elLengthLabel.textContent = String(elLength.value);
+    }
+
+    // Обновляем значение длины в блок с паролем
+    function updatePasswordStat() {
+        elPasswordStart.textContent = `длина: ${lastPassword.length}`;
+    }
+
+    // Генерируем пароль
+    function doGenerate() {
+        const options = currentOptions();
+        const pwd = generatePassword(options);
+        lastPassword = pwd;
+        elPassword.textContent = pwd;
+        updatePasswordStat();
+        btnCopy.disabled = pwd.length === 0;
+    }
+
+
+    // Функция уведомления о копировании
+    // todo - нужно будет убрать стили из js
+    function showToast(message, success = true) {
+        toast.textContent = message;
+
+        toast.style.borderColor = success
+            ? "rgba(0, 114, 79, 0.6)"
+            : "rgba(239, 68, 68, 0.6)";
+
+        toast.classList.add("show");
+
+        setTimeout(() => {
+            toast.classList.remove("show");
+        }, 1600);
+    }
+
+
+    // Делаем копию
+    // todo - нужно будет убрать стили из js
+    async function doCopy() {
+        if (!lastPassword) {
+            return;
+        }
+
+        try {
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(lastPassword);
+            } else {
+                const ta = document.createElement("textarea");
+                ta.value = lastPassword;
+                ta.setAttribute("readonly", "");
+                ta.style.opacity = "0";
+                ta.style.position = "fixed";
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand("copy");
+                document.body.removeChild(ta);
+                showToast("Пароль скопирован", true);
+            }
+        } catch {
+            showToast("Не удалось скопировать", false);
+        }
+    }
+
+    elLength.addEventListener('input', updateLengthLabel);
+    btnGenerate.addEventListener('click', doGenerate);
+    btnCopy.addEventListener('click', doCopy);
+
+
+    updateLengthLabel();
+    doGenerate()
 
 
 })
