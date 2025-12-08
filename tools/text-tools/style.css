@@ -62,7 +62,7 @@
 
 .texttools_textarea {
     width: 100%;
-    min-height: 400px;
+    min-height: 200px;
     resize: vertical;
     border-radius: 10px;
     border: 1px solid var(--color-border-subtle);
