@@ -107,7 +107,7 @@
 
             // попробовать удалить && state.upper и тд
             const isActive =
-                (action === "upper" && state.upper) || (action === "lower" && state.lower) || (action === "spacer" && state.spacer) || (action === "layout") && state.layout;
+                (action === "upper" && state.upper) || (action === "lower" && state.lower) || (action === "spacer" && state.spacer) || (action === "layout" && state.layout);
 
 
             // уточнить за all, toggle
