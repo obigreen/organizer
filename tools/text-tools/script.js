@@ -18,8 +18,96 @@
 
     // 3. ПУСТАЯ applyFilters() – добавим позже
     function applyFilters(text) {
-        return text;
+
+        let result = text;
+
+        if (state.upper) {
+            result = applyUpper(result)
+        }
+        if (state.lower) {
+            result = applyLower(result);
+        }
+        // if (state.spacer) {
+        //     result = applySpacer(result);
+        // }
+        if (state.layout) {
+            result = applyLayout(result);
+        }
+
+        return result;
     }
+
+    function applyUpper(text) {
+        return text.toUpperCase();
+    }
+
+    function applyLower(text) {
+        return text.toLowerCase();
+    }
+
+    // function applySpacer(text) {
+    //
+    //
+    //     // +++
+    //     return text.split("\n").map(line =>
+    //         line.split("").join(" ")
+    //     ).join("\n");
+    //
+    //
+    //     // return text
+    //     //     .split("\n")
+    //     //     .map(line => {
+    //     //         // убираем все пробельные символы внутри строки
+    //     //         const compact = line.replace(/\s+/g, "");
+    //     //         // вставляем один пробел между каждым символом
+    //     //         return compact.split("").join(" ");
+    //     //     })
+    //     //     .join("\n");
+    // }
+
+
+
+
+
+
+    function applyLayout(text) {
+        // Карта RU → EN
+        const ru = "ёйцукенгшщзхъфывапролджэячсмитьбю";
+        const en = "`qwertyuiop[]asdfghjkl;'zxcvbnm,.";
+
+        const mapRuToEn = {};
+        // en → ru
+        const mapEnToRu = {};
+
+        for (let i = 0; i < ru.length; i++) {
+            mapRuToEn[ru[i]] = en[i];
+        }
+        for (let i = 0; i < en.length; i++) {
+            mapEnToRu[en[i]] = ru[i];
+        }
+
+        // Для заглавных букв — такие же пары
+        for (let i = 0; i < ru.length; i++) {
+            mapRuToEn[ru[i].toUpperCase()] = en[i].toUpperCase();
+            mapEnToRu[en[i].toUpperCase()] = ru[i].toUpperCase();
+        }
+
+        let result = "";
+
+        for (const ch of text) {
+            if (mapRuToEn[ch]) {
+                result += mapRuToEn[ch]; // RU → EN
+            } else if (mapEnToRu[ch]) {
+                result += mapEnToRu[ch]; // EN → RU
+            } else {
+                result += ch; // символ без пары (пробел, цифра, знак)
+            }
+        }
+
+        return result;
+    }
+
+
 
     // 4. ОБНОВЛЕНИЕ СЧЁТЧИКОВ (добавим позже)
     function updateCounters() {
@@ -49,7 +137,14 @@
     }
 
     // 6. ОБРАБОТЧИКИ СОБЫТИЙ (добавим позже)
-    textarea.addEventListener("input", updateCounters);
+    textarea.addEventListener("paste", (e) => {
+        setTimeout(() => {
+            if (state.layout) {
+                applyCurrentText();
+            }
+        }, 0);
+    });
+
     function skipTextareaSymbols() {
 
         // textarea.value = textarea.value.replace(/^\s+|\s+$/g, "");
@@ -84,9 +179,9 @@
             }
         }
 
-        if (action === "spacer") {
-            state.spacer = !state.spacer;
-        }
+        // if (action === "spacer") {
+        //     state.spacer = !state.spacer;
+        // }
 
         if (action === "layout") {
             state.layout = !state.layout;
