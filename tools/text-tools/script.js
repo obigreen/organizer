@@ -44,15 +44,63 @@
     }
 
     // 6. ОБРАБОТЧИКИ СОБЫТИЙ (добавим позже)
-        textarea.addEventListener("input",  updateCounters);
+    textarea.addEventListener("input", updateCounters);
 
-        toolbarButtons.forEach(btn => {
-            btn.addEventListener("click", () => {
-                // здесь позже появится toggleFilter()
-            })
+    toolbarButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+
+            const action = btn.dataset.action;
+            toggleFilter(action)
         })
+    })
 
 
     updateCounters();
+
+    function toggleFilter(action) {
+
+        if (action === "upper") {
+            state.upper = !state.upper;
+            if (state.upper) {
+                state.lower = false
+            }
+        }
+
+        if (action === "lower") {
+            state.lower = !state.lower;
+            if (state.upper) {
+                state.upper = false
+            }
+        }
+
+        if (action === "spacer") {
+            state.spacer = !state.spacer;
+        }
+
+        if (action === "layout") {
+            state.layout = !state.layout;
+        }
+
+
+        applyCurrentText();
+
+    }
+
+
+    function updateToolbarUI() {
+        toolbarButtons.forEach(btn => {
+            // уточнить за dataset
+            const action = btn.dataset.action;
+
+            const isActive =
+                (action === "upper") || (action === "lower") || (action === "spacer") || (action === "layout");
+
+
+            // уточнить за all, toggle
+            btn.classList.toggle("active", isActive);
+
+        })
+    }
+
 
 })();
