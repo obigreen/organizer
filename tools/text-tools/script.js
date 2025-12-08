@@ -24,6 +24,14 @@
     // 4. ОБНОВЛЕНИЕ СЧЁТЧИКОВ (добавим позже)
     function updateCounters() {
 
+        const text = textarea.value;
+
+        charsCounter.textContent = "Symbols" + ": " + text.length;
+
+        const lines = text.split("\n").length;
+        linesCounter.textContent = "Lines" + ": " + lines;
+
+
     }
 
     // 5. ПРИМЕНИТЬ ФИЛЬТРЫ К ТЕКУЩЕМУ ТЕКСТУ
@@ -35,13 +43,15 @@
     }
 
     // 6. ОБРАБОТЧИКИ СОБЫТИЙ (добавим позже)
-    //     textarea.addEventListener("input",  applyCurrentText);
-    //
-    //     toolbarButtons.forEach(btn => {
-    //         btn.addEventListener("click", () => {
-    //             // здесь позже появится toggleFilter()
-    //         })
-    //     })
+        textarea.addEventListener("input",  updateCounters);
 
+        toolbarButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                // здесь позже появится toggleFilter()
+            })
+        })
+
+
+    updateCounters();
 
 })();
