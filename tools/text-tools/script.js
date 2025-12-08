@@ -27,7 +27,12 @@
         const text = textarea.value;
 
         // Вариант семантики
-        charsCounter.textContent = `Symbols: ${text.length}`;
+        // charsCounter.textContent = `Symbols: ${text.length}`;
+
+        // ver 2, без подсчета строк как символов
+        const visibleChars = text.replace(/\n/g, "").length;
+        charsCounter.textContent = `Symbols: ${visibleChars}`;
+
 
         const lines = text.split("\n").length;
         linesCounter.textContent = "Lines" + ": " + lines;
@@ -45,6 +50,12 @@
 
     // 6. ОБРАБОТЧИКИ СОБЫТИЙ (добавим позже)
     textarea.addEventListener("input", updateCounters);
+    function skipTextareaSymbols() {
+
+        // textarea.value = textarea.value.replace(/^\s+|\s+$/g, "");
+        // Тоже самое только .trim
+        textarea.value = textarea.value.trim();
+    }
 
     toolbarButtons.forEach(btn => {
         btn.addEventListener("click", () => {
@@ -54,7 +65,7 @@
         })
     })
 
-
+    skipTextareaSymbols()
     updateCounters();
 
     function toggleFilter(action) {
@@ -68,7 +79,7 @@
 
         if (action === "lower") {
             state.lower = !state.lower;
-            if (state.upper) {
+            if (state.lower) {
                 state.upper = false
             }
         }
@@ -83,6 +94,7 @@
 
 
         applyCurrentText();
+        updateToolbarUI()
 
     }
 
@@ -93,7 +105,7 @@
             const action = btn.dataset.action;
 
             const isActive =
-                (action === "upper") || (action === "lower") || (action === "spacer") || (action === "layout");
+                (action === "upper" && state.upper) || (action === "lower" && state.lower) || (action === "spacer" && state.spacer) || (action === "layout") && state.layout;
 
 
             // уточнить за all, toggle
