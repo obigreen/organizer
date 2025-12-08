@@ -26,7 +26,8 @@
 
         const text = textarea.value;
 
-        charsCounter.textContent = "Symbols" + ": " + text.length;
+        // Вариант семантики
+        charsCounter.textContent = `Symbols: ${text.length}`;
 
         const lines = text.split("\n").length;
         linesCounter.textContent = "Lines" + ": " + lines;
