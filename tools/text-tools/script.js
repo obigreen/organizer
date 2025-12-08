@@ -104,6 +104,8 @@
             // уточнить за dataset
             const action = btn.dataset.action;
 
+
+            // попробовать удалить && state.upper и тд
             const isActive =
                 (action === "upper" && state.upper) || (action === "lower" && state.lower) || (action === "spacer" && state.spacer) || (action === "layout") && state.layout;
 
