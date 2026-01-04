@@ -4,19 +4,19 @@
 
     const textarea = document.getElementById("texttools_input");
     const toolbarButtons = document.querySelectorAll(".texttools_btn");
-    const charsCounter = document.getElementById("texttools_chars");
-    const linesCounter = document.getElementById("texttools_lines");
+    // const charsCounter = document.getElementById("texttools_chars");
+    // const linesCounter = document.getElementById("texttools_lines");
 
 
     // 2. СОСТОЯНИЕ ФИЛЬТРОВ (пока пустое)
     const state = {
         upper: false,
         lower: false,
-        spacer: false,
         layout: false,
+        // spacer: false,
     }
 
-    // 3. ПУСТАЯ applyFilters() – добавим позже
+    // 3. applyFilters()
     function applyFilters(text) {
 
         let result = text;
@@ -30,6 +30,7 @@
         // if (state.spacer) {
         //     result = applySpacer(result);
         // }
+
         if (state.layout) {
             result = applyLayout(result);
         }
@@ -37,39 +38,17 @@
         return result;
     }
 
+    // === ВЕРХНИЙ РЕГИСТЕР ===
     function applyUpper(text) {
         return text.toUpperCase();
     }
 
+    // === НИЖНИЙ РЕГИСТЕР ===
     function applyLower(text) {
         return text.toLowerCase();
     }
 
-    // function applySpacer(text) {
-    //
-    //
-    //     // +++
-    //     return text.split("\n").map(line =>
-    //         line.split("").join(" ")
-    //     ).join("\n");
-    //
-    //
-    //     // return text
-    //     //     .split("\n")
-    //     //     .map(line => {
-    //     //         // убираем все пробельные символы внутри строки
-    //     //         const compact = line.replace(/\s+/g, "");
-    //     //         // вставляем один пробел между каждым символом
-    //     //         return compact.split("").join(" ");
-    //     //     })
-    //     //     .join("\n");
-    // }
-
-
-
-
-
-
+    // === ЗАМЕНА РАСКЛАДКИ ТЕКСТА ===
     function applyLayout(text) {
         // Карта RU → EN
         const ru = "ёйцукенгшщзхъфывапролджэячсмитьбю";
@@ -107,36 +86,57 @@
         return result;
     }
 
+    // function applySpacer(text) {
+    //
+    //
+    //     // +++
+    //     return text.split("\n").map(line =>
+    //         line.split("").join(" ")
+    //     ).join("\n");
+    //
+    //
+    //     // return text
+    //     //     .split("\n")
+    //     //     .map(line => {
+    //     //         // убираем все пробельные символы внутри строки
+    //     //         const compact = line.replace(/\s+/g, "");
+    //     //         // вставляем один пробел между каждым символом
+    //     //         return compact.split("").join(" ");
+    //     //     })
+    //     //     .join("\n");
+    // }
 
 
-    // 4. ОБНОВЛЕНИЕ СЧЁТЧИКОВ (добавим позже)
-    function updateCounters() {
 
-        const text = textarea.value;
-
-        // Вариант семантики
-        // charsCounter.textContent = `Symbols: ${text.length}`;
-
-        // ver 2, без подсчета строк как символов
-        const visibleChars = text.replace(/\n/g, "").length;
-        charsCounter.textContent = `Symbols: ${visibleChars}`;
-
-
-        const lines = text.split("\n").length;
-        linesCounter.textContent = "Lines" + ": " + lines;
-
-
-    }
+    // 4. ОБНОВЛЕНИЕ СЧЁТЧИКОВ символов и линий
+    // function updateCounters() {
+    //
+    //     const text = textarea.value;
+    //
+    //     // Вариант семантики
+    //     // charsCounter.textContent = `Symbols: ${text.length}`;
+    //
+    //     // ver 2, без подсчета строк как символов
+    //     const visibleChars = text.replace(/\n/g, "").length;
+    //     charsCounter.textContent = `Symbols: ${visibleChars}`;
+    //
+    //
+    //     const lines = text.split("\n").length;
+    //     linesCounter.textContent = "Lines" + ": " + lines;
+    //
+    //
+    // }
 
     // 5. ПРИМЕНИТЬ ФИЛЬТРЫ К ТЕКУЩЕМУ ТЕКСТУ
     function applyCurrentText() {
         const raw = textarea.value;
-        const processed = applyFilters(raw);
-        textarea.value = processed;
-        updateCounters()
+        textarea.value = applyFilters(raw);
+        // updateCounters()
     }
 
-    // 6. ОБРАБОТЧИКИ СОБЫТИЙ (добавим позже)
+
+    // todo - чекнуть, потому что при комментировании этой функции по сути ничего не меняется
+    // 6. ОБРАБОТЧИКИ СОБЫТИЙ
     textarea.addEventListener("paste", (e) => {
         setTimeout(() => {
             if (state.layout) {
@@ -161,7 +161,7 @@
     })
 
     skipTextareaSymbols()
-    updateCounters();
+    // updateCounters();
 
     function toggleFilter(action) {
 
@@ -201,8 +201,9 @@
 
 
             // попробовать удалить && state.upper и тд
+            // (action === "spacer" && state.spacer) - был в isActive
             const isActive =
-                (action === "upper" && state.upper) || (action === "lower" && state.lower) || (action === "spacer" && state.spacer) || (action === "layout" && state.layout);
+                (action === "upper" && state.upper) || (action === "lower" && state.lower) || (action === "layout" && state.layout);
 
 
             // уточнить за all, toggle
